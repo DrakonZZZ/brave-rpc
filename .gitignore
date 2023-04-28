@@ -1,4 +1,4 @@
 node_modules
-chrome\extension\js
-chrome\extension\vendor
-chrome\extension\manifest.json
+ext_src
+extension.crx
+extension.pem

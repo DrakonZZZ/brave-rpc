@@ -30,6 +30,7 @@ rpc.on('ready', () => {
       rpc.clearActivity();
       throw new Error('not a valid link');
     }
+    res.sendStatus(200);
   });
 });
 
