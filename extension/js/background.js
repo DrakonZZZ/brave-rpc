@@ -1,6 +1,7 @@
 let updatePresence = (tab) => {
   if (tab) {
-    var url = new URL(tab.url);
+    let url = new URL(tab.url);
+    console.log(url);
     var data = {
       action: 'active',
       url: tab.url,

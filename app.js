@@ -8,28 +8,28 @@ app.use(express.json());
 
 const rpc = new Rpc.Client({ transport: 'ipc' });
 
-const braveData = (data) => {
-  const presence = {
+const activity = (data) => {
+  const presenceData = {
     state: data.state,
     details: data.details,
-    largeImageKey: 'bb',
-    largeImageText: 'Drakonz Brave Browser',
-    smallImageText: data.url,
+    startTimestamp: new Date().getTime(),
+    largeImageKey: '1brave',
+    largeImageText: 'Brave Browser',
+    buttons: [{ label: 'Visit the site', url: data.url }],
     instance: true,
   };
-
-  return presence;
+  return presenceData;
 };
 
 rpc.on('ready', () => {
   app.post('/', (req, res) => {
     let data = req.body;
-    if (data.action === 'active') {
-      rpc.setActivity(braveData(data));
-    } else if (data.action === 'unactive') {
+    if (data.action === 'set') {
+      rpc.setActivity(activity(data));
+    } else if (data.action === 'clear') {
       rpc.clearActivity();
+      throw new Error('not a valid link');
     }
-    res.sendStatus(20);
   });
 });
 
