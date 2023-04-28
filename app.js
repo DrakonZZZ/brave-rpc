@@ -1,27 +1,38 @@
-const express = require('express');
-const RPC = require("discord-rpc");
+import express from 'express';
+import Rpc from 'discord-rpc';
 
-const client = new RPC.Client({ transport: 'ipc' });
-client.login({ clientId: '612158030473068545' });
+const app = express();
+const PORT = 3000;
 
-client.once('ready', ()=>{
-	const app = express();
-	app.use(express.json());
-	app.post("/", (request, response) => {
-		let body = request.body;
-		if (body.action == "set") {
-			let presence = {
-				state: body.state.substring(0, 128),
-				details: body.details.substring(0, 128),
-				largeImageKey: '1brave',
-				largeImageText: 'Drakonz Brave Browser',
-				instance: true
-			};
-			client.setActivity(presence);
-		} else if (body.action == "clear") {
-			client.clearActivity();
-		}
-		response.sendStatus(20);
-	});
-	app.listen(3000, () => console.log('Discord-Chrome-Presence is ready!'));
+app.use(express.json());
+
+const rpc = new Rpc.Client({ transport: 'ipc' });
+
+const braveData = (data) => {
+  const presence = {
+    state: data.state,
+    details: data.details,
+    largeImageKey: 'bb',
+    largeImageText: 'Drakonz Brave Browser',
+    smallImageText: data.url,
+    instance: true,
+  };
+
+  return presence;
+};
+
+rpc.on('ready', () => {
+  app.post('/', (req, res) => {
+    let data = req.body;
+    if (data.action === 'active') {
+      rpc.setActivity(braveData(data));
+    } else if (data.action === 'unactive') {
+      rpc.clearActivity();
+    }
+    res.sendStatus(20);
+  });
 });
+
+app.listen(PORT, () => console.log(`Brave RPC is running on PORT: ${PORT}`));
+
+rpc.login({ clientId: '612158030473068545' }).catch(console.error);
