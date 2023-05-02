@@ -15,7 +15,9 @@ Install the brave extension, included in the extension directory. Then, start th
 
 ## Usage
 ```javascript
-git clone https://github.com/DrakonZZZ/brave-rp or download the content in zip format.
+git clone https://github.com/DrakonZZZ/brave-rp 
+
+or download the content in zip format.
 
 run ./start.sh in your terminal or run npm start
 ```
