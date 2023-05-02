@@ -12,7 +12,6 @@ Discord-Chrome-Presence allows you to set your Discord Rich Presence to whatever
 
 ```javascript
 git clone https://github.com/DrakonZZZ/brave-rp
-cd discord-chrome-presence
 npm install
 npm start
 ```
