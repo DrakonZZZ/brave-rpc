@@ -26,6 +26,7 @@ let updatePresence = (tab) => {
     },
     processData: false,
     data: JSON.stringify(data),
+    //need to implement fetch api for future version 
   };
 
   $.ajax(settings);
