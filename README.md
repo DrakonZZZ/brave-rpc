@@ -1,5 +1,5 @@
 ## Overview
-
+![](https://github.com/DrakonZZZ/brave-rpc/blob/1e2e6200d44335d78ff252f1eee83c3c089679bd/Active%20RPC%20image.jpg)
 Discord-Chrome-Presence allows you to set your Discord Rich Presence to whatever you're looking at it in Brave. An additional brave extension is included in order to rely site information.
 
 ## Requirements
